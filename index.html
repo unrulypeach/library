@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+  <title>Library</title>
+</head>
+
+<body>
+  <h1>Someone's book library</h1>
+  <p>Start creating your locally stored library</p>
+  <form class="input-area">
+    
+    <div class="items" id="one">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title">
+    </div>
+    
+    <div class="items" id="two">
+      <label for="author">Author</label>
+      <input type="text" name="author" id="author">
+    </div>
+    
+    <div class="items" id="three">
+      <label for="status">Status</label>
+      <select type="select" name="status" id="status">
+        <option value="ipr" selected>IN PROGRESS</option>
+        <option value="read">COMPLETED</option>
+        <option value="not-read">NOT-READ</option>
+      </select>
+    </div>
+    
+    <button>ADD</button>
+  </form>
+
+  <div id="bookshelf">
+    <div id="bookshelf-header">
+      <h2>Title</h2>
+      <h2>Author</h2>
+      <h2>Status</h2>
+    </div>
+
+    <div class="book">
+      <p>The Art of War</p>
+      <p>Sun Tzu</p>
+      <button>Completed</button>
+      <button>-</button>
+    </div>
+  </div>
+  
+</body>
+</html>
