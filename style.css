@@ -58,6 +58,10 @@ select{
   margin-top: 8%;
 }
 
+select>#read{
+  background-color: rgb(93, 180, 154);
+}
+
 option{
   font-size: 14px;
 }

@@ -44,10 +44,7 @@ function addBookToLibrary() {
 //display a book: x = book object
 function displayLibrary(x) {
     const newDiv = document.createElement("div")
-    const jsTitle = x.title.replace(/\s+/g, '')
-    const result = jsTitle.toLowerCase() + x.author.replace(/\s+/g, '')
     newDiv.classList.add('book')
-    newDiv.setAttribute('id', result)
 
     const titleP = document.createElement("p")
     titleP.textContent = x.title;
@@ -60,6 +57,9 @@ function displayLibrary(x) {
     const progressP = document.createElement("button")
     progressP.classList.add("progress")
     progressP.textContent = x.progress;
+    progressP.addEventListener("click", function(e){
+
+    })
     newDiv.append(progressP)
 
     const removeBut = document.createElement("button")
@@ -68,8 +68,11 @@ function displayLibrary(x) {
     removeBut.addEventListener("click", function(e){
       const getTitle = this.parentNode.childNodes[0].innerHTML
       const getAuthor = this.parentNode.childNodes[1].innerHTML
-
+      
       removeBookFromLibrary(getTitle)
+      
+      const currentDiv = this.parentNode
+      currentDiv.remove()
     })
     newDiv.append(removeBut)
 
@@ -77,15 +80,20 @@ function displayLibrary(x) {
     bookshelf.appendChild(newDiv)
 }
 
-//remove a book from [] and screen
+//remove a book from [] only
 function removeBookFromLibrary(bkTitle) {
   //find index number
   let position = myLibrary.map(object => object.title).indexOf(bkTitle)
-  //rm from screen
-    
   //from array
-
-
+  myLibrary.splice(position, 1)  
 }
 
-//change
+//change progress button
+function changeProgress() {
+  const ipr = document.getElementById('ipr').value
+  const read = document.getElementById('read').value
+  const nRead = document.getElementById('notRead').value
+  const currentProgress = document.getElementById('progress').value
+
+  
+}
