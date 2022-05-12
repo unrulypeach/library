@@ -15,18 +15,26 @@ h1{
 }
 
 .input-area {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  justify-items: center;
 }
 
 .items {
-  flex: 1 1 auto
+  width: 100%;
 }
 
-label {
-  padding-left: 10px;
-  padding-right: 5px;
+
+.opaque {
+  position: absolute;
+
+  opacity: 0.3;
+
+  padding-top: 18px;
+  padding-left: 25px;
 }
+
 
 input {
   border-radius: 5px;
@@ -34,26 +42,20 @@ input {
 
   height: 2.5em;
   font-size: 14px;
+
+  width: 90%;
+
+  margin-left: 21px;
+  margin-top: 10px;
 }
 
-#one {
-  flex-grow: 3;
-}
-
-#title {
-  width: 82%;
-}
-
-#two {
-  flex-grow: 2;
-}
-
-#author {
-  width: 82%;
-}
 
 select{
-  height: 100%;
+  width: 90%;
+  height: 2.5em;
+
+  margin-left: 10%;
+  margin-top: 8%;
 }
 
 option{
@@ -69,18 +71,49 @@ button {
   color: whitesmoke;
 }
 
+button:hover {
+  background-color: rgb(122, 199, 224);
+}
+
 #bookshelf {
   display: grid;
-  grid-template-rows: 100px 50px;
+  grid-template-rows: 100px 60px 50px;
   grid-auto-rows: 50px;
 }
 
 #bookshelf-header {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+
+  border-bottom: 1px solid black;
+  justify-items: center;
+
+  padding-top: 25px;
 }
 
 .book {
   display: grid;
-  grid-template-columns: repeat(3, 2fr) 1fr;
+  grid-template-columns: repeat(4, 1fr);
+
+  border-bottom: 1px solid grey;
+  justify-items: center;
 }
+
+.book>p {
+  padding-top: 7px;
+}
+
+.book>button{
+  height: 85%;
+  margin-top: 1px;
+}
+
+.remove-but{
+  background-color: rgba(235, 70, 70, 0.637);
+}
+
+.remove-but:hover{
+  font-size: 28px;
+  background-color: rgba(235, 70, 70);
+}
+

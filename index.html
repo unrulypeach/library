@@ -15,48 +15,41 @@
 <body>
   <h1>Someone's book library</h1>
   <p>Start creating your locally stored library</p>
-  <form class="input-area">
-    
-    <div class="items" id="one">
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title">
-    </div>
-    
-    <div class="items" id="two">
-      <label for="author">Author</label>
-      <input type="text" name="author" id="author">
-    </div>
-    
-    <div class="items" id="three">
-      <label for="status">Status</label>
-      <select type="select" name="status" id="status">
-        <option value="ipr" selected>IN PROGRESS</option>
-        <option value="read">COMPLETED</option>
-        <option value="not-read">NOT-READ</option>
-      </select>
-    </div>
-    
-    <button>ADD</button>
-  </form>
+
 
   <div id="bookshelf">
     <div id="bookshelf-header">
       <h2>Title</h2>
       <h2>Author</h2>
       <h2>Status</h2>
+      <div></div>
     </div>
 
-    <div class="book">
-      <p>The Art of War</p>
-      <p>Sun Tzu</p>
-      <button>Completed</button>
-      <button>-</button>
-    </div>
-
-    <div class="book">
+    <div class="input-area">
+    
+      <div class="items text-inp" id="one">
+        <!-- <label for="title" class="opaque">Title</label> -->
+        <input type="text" class="text-in" name="title" id="title" placeholder="book title">
+      </div>
       
+      <div class="items text-inp" id="two">
+        <!-- <label for="author" class="opaque">Author</label> -->
+        <input type="text" class="text-in" name="author" id="author" placeholder="author's name">
+      </div>
+      
+      <div class="items" id="three">
+        <select type="select" name="progress" id="progress">
+          <option value="ipr" selected>IN PROGRESS</option>
+          <option value="read">COMPLETED</option>
+          <option value="not-read">NOT-READ</option>
+        </select>
+      </div>
+      
+      <button id="add-book">ADD BOOK</button>
+
     </div>
-  </div>
+
   
+  <script src="script.js"></script>
 </body>
 </html>
