@@ -34,8 +34,19 @@ function addBookToLibrary() {
   for (const item in myLibrary) {
     if (myLibrary[item].title == book.title && myLibrary[item].author == book.author) {
       myLibrary[item].progress = book.progress
+
+      //find the element 
+      
+      for (const pEl of document.querySelectorAll('p')) {
+        if (pEl.textContent.includes(book.title)) {
+          const progBut = pEl.parentNode.childNodes[2]
+          progBut.setAttribute('class', book.progress)
+          progBut.innerHTML = book.progress
+        }
+      }
       alert('The book already exists. The progress has been updated.')
       return
+
     }
   }
 
@@ -43,57 +54,72 @@ function addBookToLibrary() {
 }
 //display a book: x = book object
 function displayLibrary(x) {
-    const newDiv = document.createElement("div")
-    newDiv.classList.add('book')
 
-    const titleP = document.createElement("p")
-    titleP.textContent = x.title;
-    newDiv.append(titleP)
+  const newDiv = document.createElement("div")
+  newDiv.classList.add('book')
 
-    const authorP = document.createElement("p")
-    authorP.textContent = x.author;
-    newDiv.append(authorP)
+  const titleP = document.createElement("p")
+  titleP.textContent = x.title;
+  newDiv.append(titleP)
 
-    const progressP = document.createElement("button")
-    progressP.classList.add("progress")
-    progressP.textContent = x.progress;
-    progressP.addEventListener("click", function(e){
+  const authorP = document.createElement("p")
+  authorP.textContent = x.author;
+  newDiv.append(authorP)
 
-    })
-    newDiv.append(progressP)
+  const progressP = document.createElement("button")
+  progressP.classList.add(x.progress)
+  progressP.textContent = x.progress;
+  progressP.addEventListener("click", function(e){
+    // console.log(this)
+    changeProgress(this)
+  })
+  newDiv.append(progressP)
 
-    const removeBut = document.createElement("button")
-    removeBut.classList.add("remove-but")
-    removeBut.textContent = '-'
-    removeBut.addEventListener("click", function(e){
-      const getTitle = this.parentNode.childNodes[0].innerHTML
-      const getAuthor = this.parentNode.childNodes[1].innerHTML
-      
-      removeBookFromLibrary(getTitle)
-      
-      const currentDiv = this.parentNode
-      currentDiv.remove()
-    })
-    newDiv.append(removeBut)
+  const removeBut = document.createElement("button")
+  removeBut.classList.add("remove-but")
+  removeBut.textContent = '-'
+  removeBut.addEventListener("click", function(e){
+    const getTitle = this.parentNode.childNodes[0].innerHTML
+    const getAuthor = this.parentNode.childNodes[1].innerHTML
+    
+    removeBookFromLibrary(getTitle, getAuthor)
+    
+    const currentDiv = this.parentNode
+    currentDiv.remove()
+  })
+  newDiv.append(removeBut)
 
-    const bookshelf = document.getElementById("bookshelf")
-    bookshelf.appendChild(newDiv)
+  const bookshelf = document.getElementById("bookshelf")
+  bookshelf.appendChild(newDiv)
 }
-
 //remove a book from [] only
-function removeBookFromLibrary(bkTitle) {
+function removeBookFromLibrary(bkTitle, auTitle) {
   //find index number
-  let position = myLibrary.map(object => object.title).indexOf(bkTitle)
+  let bPosition = myLibrary.map(object => object.title).indexOf(bkTitle)
+  let aPosition = myLibrary.map(item => item.author).indexOf(auTitle)
+
   //from array
-  myLibrary.splice(position, 1)  
+  if (bPosition == aPosition) {
+    myLibrary.splice(bPosition, 1)  
+  }
 }
-
 //change progress button
-function changeProgress() {
-  const ipr = document.getElementById('ipr').value
-  const read = document.getElementById('read').value
-  const nRead = document.getElementById('notRead').value
-  const currentProgress = document.getElementById('progress').value
+function changeProgress(aDiv) {
+  const bookDiv = aDiv.className
 
-  
+  //add new class
+  switch (bookDiv) {
+    case "ipr":
+      aDiv.setAttribute('class', 'read')
+      aDiv.innerHTML = 'read'
+      break;
+    case "read":
+      aDiv.setAttribute('class', 'not-read')
+      aDiv.innerHTML = 'not-read'
+      break;
+    case "not-read":
+      aDiv.setAttribute('class', 'ipr')
+      aDiv.innerHTML = 'ipr'
+      break;    
+  }
 }

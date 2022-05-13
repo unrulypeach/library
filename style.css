@@ -58,8 +58,28 @@ select{
   margin-top: 8%;
 }
 
-select>#read{
+.read{
+  background-color: rgb(111, 172, 153);
+}
+
+.read:hover{
   background-color: rgb(93, 180, 154);
+}
+
+.ipr{
+  background-color: rgb(241, 189, 128);
+}
+
+.ipr:hover{
+  background-color: rgb(243, 182, 112);
+}
+
+.not-read{
+  background-color: rgb(218, 143, 143);
+}
+
+.not-read:hover{
+  background-color: rgb(216, 130, 130);
 }
 
 option{
