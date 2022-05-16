@@ -36,7 +36,6 @@ function addBookToLibrary() {
       myLibrary[item].progress = book.progress
 
       //find the element 
-      
       for (const pEl of document.querySelectorAll('p')) {
         if (pEl.textContent.includes(book.title)) {
           const progBut = pEl.parentNode.childNodes[2]
@@ -44,6 +43,7 @@ function addBookToLibrary() {
           progBut.innerHTML = book.progress
         }
       }
+
       alert('The book already exists. The progress has been updated.')
       return
 
