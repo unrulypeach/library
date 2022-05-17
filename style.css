@@ -23,7 +23,13 @@ h1, p{
 h1{
   padding-top: 50px;
 }
-
+#firsty{
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+#sub{
+  margin-bottom: 25px;
+}
 .input-area {
   border-bottom: solid 1px rgb(202, 201, 201);
 
@@ -153,10 +159,14 @@ button:hover {
 .book>button{
   margin-top: 8px;
 
+  width: 75%;
 }
 
 .remove-but{
   background-color: rgba(235, 70, 70, 0.637);
+
+  max-width: 5vw;
+  min-width: 30px;
 }
 
 .remove-but:hover{

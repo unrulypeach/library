@@ -3,26 +3,22 @@ const exists = document.getElementsByClassName('book')
 //add book button
 const addBook = document.getElementById('add-book')
 addBook.addEventListener("click", addBookToLibrary);
-
 // object - book template
 function Book(title, author, progress) {
   this.title = title
   this.author = author 
   this.progress = progress
 }
-
 //load two example books
 const bookOne = new Book('The Art of War', 'Sun Tzu', 'read')
 const bookTwo = new Book('Demons', 'Fydor Dostoevsky', 'ipr')
 addBooks(bookOne)
 addBooks(bookTwo)
-
 //add book to array
 function addBooks(item) {
   myLibrary.push(item);
   displayLibrary(myLibrary.at(-1))
 }
-
 //ADD button press -> get info, if not in array, add book
 function addBookToLibrary() {
   const addTitle = document.getElementById('title').value 
@@ -62,7 +58,6 @@ function addBookToLibrary() {
   document.getElementById('title').value = ""
   document.getElementById('author').value = ""
 }
-
 //display book on HTML
 function displayLibrary(x) {
 
