@@ -30,6 +30,14 @@ function addBookToLibrary() {
   const getProgress = document.getElementById('progress').value
   const book = new Book(addTitle, addAuthor, getProgress);
   
+  //check title and author are not empty
+  if (addTitle === "") {
+    alert('please add a title')
+    return
+  } else if (addAuthor === "") {
+    alert('please add an author')
+    return
+  }
   //if the exact some book is not in library add it
   for (const item in myLibrary) {
     if (myLibrary[item].title == book.title && myLibrary[item].author == book.author) {
@@ -49,8 +57,10 @@ function addBookToLibrary() {
 
     }
   }
-
   addBooks(book)
+
+  document.getElementById('title').value = ""
+  document.getElementById('author').value = ""
 }
 
 //display book on HTML
