@@ -4,7 +4,6 @@ const exists = document.getElementsByClassName('book')
 const addBook = document.getElementById('add-book')
 addBook.addEventListener("click", addBookToLibrary);
 
-
 // object - book template
 function Book(title, author, progress) {
   this.title = title
@@ -18,12 +17,13 @@ const bookTwo = new Book('Demons', 'Fydor Dostoevsky', 'ipr')
 addBooks(bookOne)
 addBooks(bookTwo)
 
+//add book to array
 function addBooks(item) {
   myLibrary.push(item);
   displayLibrary(myLibrary.at(-1))
 }
 
-//when ADD button is pressed
+//ADD button press -> get info, if not in array, add book
 function addBookToLibrary() {
   const addTitle = document.getElementById('title').value 
   const addAuthor = document.getElementById('author').value
@@ -52,7 +52,8 @@ function addBookToLibrary() {
 
   addBooks(book)
 }
-//display a book: x = book object
+
+//display book on HTML
 function displayLibrary(x) {
 
   const newDiv = document.createElement("div")
@@ -70,38 +71,28 @@ function displayLibrary(x) {
   progressP.classList.add(x.progress)
   progressP.textContent = x.progress;
   progressP.addEventListener("click", function(e){
-    // console.log(this)
     changeProgress(this)
+    const ind = getIndexNum(getTitle(this), getAuthor(this))
+    myLibrary[ind].changeProg(getTitle(this), getAuthor(this))
   })
   newDiv.append(progressP)
 
   const removeBut = document.createElement("button")
   removeBut.classList.add("remove-but")
   removeBut.textContent = '-'
-  removeBut.addEventListener("click", function(e){
-    const getTitle = this.parentNode.childNodes[0].innerHTML
-    const getAuthor = this.parentNode.childNodes[1].innerHTML
-    
-    removeBookFromLibrary(getTitle, getAuthor)
-    
-    const currentDiv = this.parentNode
-    currentDiv.remove()
+  removeBut.addEventListener("click", function(e){    
+    removeBookFromLibrary(getTitle(this), getAuthor(this))
+    this.parentNode.remove()
   })
   newDiv.append(removeBut)
 
   const bookshelf = document.getElementById("bookshelf")
   bookshelf.appendChild(newDiv)
 }
-//remove a book from [] only
+//remove book from []
 function removeBookFromLibrary(bkTitle, auTitle) {
-  //find index number
-  let bPosition = myLibrary.map(object => object.title).indexOf(bkTitle)
-  let aPosition = myLibrary.map(item => item.author).indexOf(auTitle)
-
-  //from array
-  if (bPosition == aPosition) {
-    myLibrary.splice(bPosition, 1)  
-  }
+  const index = getIndexNum(bkTitle, auTitle)
+  myLibrary.splice(index, 1)
 }
 //change progress button
 function changeProgress(aDiv) {
@@ -122,4 +113,37 @@ function changeProgress(aDiv) {
       aDiv.innerHTML = 'ipr'
       break;    
   }
+}
+Book.prototype.changeProg = function(bookTitle, authorTitle) {
+  
+  const indexNum = getIndexNum(bookTitle, authorTitle)
+
+  //change progress
+  switch (myLibrary[indexNum].progress) {
+    case "ipr":
+      myLibrary[indexNum].progress = 'read'
+      break;
+    case "read":
+      myLibrary[indexNum].progress = 'not-read'
+      break;
+    case "not-read":
+      myLibrary[indexNum].progress = 'ipr'
+      break;    
+  }
+}
+function getIndexNum(book, author) {
+  let bPosition = myLibrary.map(object => object.title).indexOf(book)
+  let aPosition = myLibrary.map(item => item.author).indexOf(author)
+
+  if (bPosition == aPosition) {
+    return bPosition
+  } else {
+    console.log('borken')
+  }
+}
+function getTitle(el){
+  return el.parentNode.childNodes[0].innerHTML
+}
+function getAuthor(el){
+  return el.parentNode.childNodes[1].innerHTML
 }

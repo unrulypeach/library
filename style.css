@@ -5,9 +5,19 @@
   font-family: 'Radio Canada', sans-serif;
 }
 
+body{
+  width: 70vw;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  body{
+    width: 100%;
+  }
+}
 h1, p{
   text-align: center;
-  padding-bottom: 30px;
 }
 
 h1{
@@ -15,6 +25,8 @@ h1{
 }
 
 .input-area {
+  border-bottom: solid 1px rgb(202, 201, 201);
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
@@ -43,19 +55,22 @@ input {
   height: 2.5em;
   font-size: 14px;
 
-  width: 90%;
+  width: 92%;
 
-  margin-left: 21px;
+  margin-left: 6px;
   margin-top: 10px;
 }
 
+input:focus{
+  border: solid 1px rgb(155, 192, 226);
+}
 
 select{
   width: 90%;
   height: 2.5em;
 
-  margin-left: 10%;
-  margin-top: 8%;
+  margin-left: 5px;
+  margin-top: 13px;
 }
 
 .read{
@@ -90,9 +105,15 @@ button {
   font-weight: 600;
   border: none;
   border-radius: 4px;
-  width: 9vw;
+  height: 69%;
+  width: 10vw;
   background-color: lightblue;
   color: whitesmoke;
+}
+
+button#add-book {
+  width: 15vw;
+  margin-top: 9px;
 }
 
 button:hover {
@@ -101,7 +122,7 @@ button:hover {
 
 #bookshelf {
   display: grid;
-  grid-template-rows: 100px 60px 50px;
+  grid-template-rows: 75px 60px 50px;
   grid-auto-rows: 50px;
 }
 
@@ -109,27 +130,29 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   justify-items: center;
+}
 
-  padding-top: 25px;
+#bookshelf-header>h2{
+  margin-top: 35px;
 }
 
 .book {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr) ;
 
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgb(202, 201, 201);
   justify-items: center;
 }
 
 .book>p {
-  padding-top: 7px;
+  margin-top: 15px;
 }
 
 .book>button{
-  height: 85%;
-  margin-top: 1px;
+  margin-top: 8px;
+
 }
 
 .remove-but{
