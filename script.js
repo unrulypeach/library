@@ -3,7 +3,10 @@ class Library {
   constructor(library = []){
     this.library = library;
   }
-
+  addBooks(item) {
+    this.library.push(item);
+    this.displayLibrary(this.library.at(-1))
+  }
   addBookToLibrary() {
     const addTitle = document.getElementById('title').value; 
     const addAuthor = document.getElementById('author').value;
@@ -36,8 +39,7 @@ class Library {
         return;
       }
     }
-    this.library.push(book);
-    this.displayLibrary(this.library.at(-1))
+    this.addBooks(book)
   
     document.getElementById('title').value = ""
     document.getElementById('author').value = ""
@@ -59,20 +61,25 @@ class Library {
     const progressP = document.createElement("button")
     progressP.classList.add(x.progress)
     progressP.textContent = x.progress;
-    // progressP.addEventListener("click", function(e){
-    //   changeProgress(this)
-    //   const ind = getIndexNum(getTitle(this), getAuthor(this))
-    //   myLibrary[ind].changeProg(getTitle(this), getAuthor(this))
-    // })
+    const self = this;
+    progressP.addEventListener("click", function(e){
+      let className = this.className
+      let theTitle = this.parentNode.childNodes[0].innerHTML;
+      let theAuthor = this.parentNode.childNodes[1].innerHTML;
+      const ind = self.getIndexNum(theTitle, theAuthor)
+      self.library[ind].changeProgress(this)
+    })
     newDiv.append(progressP)
   
     const removeBut = document.createElement("button")
     removeBut.classList.add("remove-but")
     removeBut.textContent = '-'
-    // removeBut.addEventListener("click", function(e){    
-    //   this.removeBookFromLibrary(getTitle(this), getAuthor(this))
-    //   this.parentNode.remove()
-    // })
+    removeBut.addEventListener("click", function(e){
+      let theTitle = this.parentNode.childNodes[0].innerHTML;
+      let theAuthor = this.parentNode.childNodes[1].innerHTML;    
+      self.removeBookFromLibrary(theTitle, theAuthor)
+      this.parentNode.remove()
+    })
     newDiv.append(removeBut)
   
     const bookshelf = document.getElementById("bookshelf")
@@ -80,13 +87,12 @@ class Library {
   }
   //remove book from []
   removeBookFromLibrary(bkTitle, auTitle) {
-    const index = getIndexNum(bkTitle, auTitle)
+    const index = this.getIndexNum(bkTitle, auTitle)
     this.library.splice(index, 1)
   }
-
   getIndexNum(book, author) {
-    let bPosition = myLibrary.map(object => object.title).indexOf(book)
-    let aPosition = myLibrary.map(item => item.author).indexOf(author)
+    let bPosition = this.library.map(object => object.title).indexOf(book)
+    let aPosition = this.library.map(item => item.author).indexOf(author)
   
     if (bPosition == aPosition) {
       return bPosition
@@ -105,11 +111,10 @@ class Book {
   /**
    * @param {string} value
    */
-   changeProgress(value) { //the following makes no sense
-    //change progress button
-  
+   changeProgress(aDiv) { 
     //change progress
-    switch (value) {
+    const bookDiv = aDiv.className
+    switch (bookDiv) {
       case "ipr":
         this.progress ='read'
         aDiv.setAttribute('class', 'read')
@@ -137,3 +142,5 @@ addBook.addEventListener("click", myLibrary.addBookToLibrary.bind(myLibrary));
 
 const bookOne = new Book('The Art of War', 'Sun Tzu', 'read')
 const bookTwo = new Book('Demons', 'Fydor Dostoevsky', 'ipr')
+myLibrary.addBooks(bookOne);
+myLibrary.addBooks(bookTwo);
